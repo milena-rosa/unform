@@ -6,9 +6,12 @@ import React, {
   useCallback,
   useImperativeHandle,
   RefForwardingComponent,
+  useEffect,
 } from 'react';
 
 import dot from 'dot-object';
+
+import analytics from '@react-native-firebase/analytics';
 
 import FormContext from './Context';
 import { UnformErrors, UnformField, FormHandles, FormProps } from './types';
@@ -19,6 +22,16 @@ const Form: RefForwardingComponent<FormHandles, FormProps> = (
 ) => {
   const [errors, setErrors] = useState<UnformErrors>({});
   const fields = useRef<UnformField[]>([]);
+
+  useEffect(() => {
+    analytics().setCurrentScreen('form');
+
+    analytics().logEvent('event', {
+      eventCategory: 'lib-unform',
+      eventAction: 'criar',
+      eventLabel: 'form',
+    });
+  }, []);
 
   const getFieldByName = useCallback(
     fieldName =>

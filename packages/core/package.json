@@ -27,6 +27,8 @@
     "url": "https://github.com/Rocketseat/unform/issues"
   },
   "dependencies": {
+    "@react-native-firebase/analytics": "^7.4.1",
+    "@react-native-firebase/app": "^8.3.0",
     "dot-object": "^2.1.2"
   },
   "devDependencies": {
